@@ -124,15 +124,52 @@ class ArrayUtils {
   }
 }
 
-class Circel{
-  constructor(redius){
+class Circel {
+  static allowedColors = new Set(["red", "blue", "green"]);
+  constructor(redius, color) {
+    if (Circel.allowedColors.has(color)) {
+      this._color = color;
+    } else {
+      throw new Error("color must be red, blue or green");
+    }
     this.redius = redius;
   }
+
+  set redius(redius) {
+    if (redius < 0) {
+      console.log("redius can't be negative");
+    } else {
+      this._redius = redius;
+    }
+  }
+  set color(color) {
+    // if(color === "red" || color === "blue" || color === "green"){
+    //   this._color = color;
+    // }else{
+    //   console.log("color must be red, blue or green")
+    // }
+
+    // allowedColors = ["red", "blue", "green"];
+    // if(allowedColors.includes(color)){
+    //   this._color = color;
+    // }else{
+    //   console.log("color must be red, blue or green")
+    // }
+
+    if (allowedColors.has(color)) {
+      this._color = color;
+    } else {
+      console.log("color must be red, blue or green");
+    }
+  }
+
   //getters for diameter
   // the point of using getters is to act like a property , but we have function logic behind it
   // so we can use it like a property but it is a function behind the scene
-  get diameter(){
+  get diameter() {
     return this.redius * 2;
   }
+  get color() {
+    return this.color;
+  }
 }
-
