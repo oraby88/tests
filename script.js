@@ -172,4 +172,99 @@ class Circel {
   get color() {
     return this.color;
   }
+
+  #privateMethod() {
+    console.log("This is a private method");
+  }
+  publicMethod() {
+    console.log("This is a public method");
+    this.#privateMethod(); // calling private method from public method
+  }
+}
+
+class User {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  set setFullName(newName) {
+    const [first, last] = newName.split(" ");
+    this.firstName = first;
+    this.lastName = last;
+  }
+}
+
+class Connection {
+  static connection = null;
+  static {
+    if (this.connection != null) {
+      throw new Error("Connection already exists.");
+    } else {
+      console.log("Connection created successfully.");
+    }
+  }
+}
+
+class UserProfile {
+  #userName;
+  #email;
+  #birthdate;
+  constructor(userName, email, birthdate) {
+    if (typeof userName !== "string" || userName.trim() === "") {
+      throw new Error("Invalid username");
+    } else {
+      this.#userName = userName;
+    }
+    if (!email.includes("@")) {
+      throw new Error("Invalid email.");
+    } else {
+      this.#email = email;
+    }
+    if (isNaN(Date.parse(birthdate))) {
+      throw new Error("Invalid birthdate.");
+    } else {
+      this.#birthdate = birthdate;
+    }
+  }
+
+  set userName(name) {
+    if (typeof name !== "string" || name.trim() === "") {
+      throw new Error("Invalid username");
+    } else {
+      this.#userName = name;
+    }
+  }
+  get userName() {
+    return this.#userName;
+  }
+  set email(email) {
+    if (!email.includes("@")) {
+      throw new Error("Invalid email.");
+    } else {
+      this.#email = email;
+    }
+  }
+  get email() {
+    return this.#email;
+  }
+  set birthdate(date) {
+    if (!(date instanceof Date)) {
+      throw new Error("Invalid birthdate.");
+    } else {
+      this.#birthdate = date;
+    }
+  }
+  get birthdate() {
+    return this.#birthdate;
+  }
+  displayProfile() {
+    return `User: ${this.#userName}, Email: ${this.#email}, Birthdate: ${
+      this.#birthdate
+    }`;
+  }
 }
