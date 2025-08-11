@@ -216,7 +216,7 @@ class UserProfile {
   #birthdate;
   constructor(userName, email, birthdate) {
     if (typeof userName !== "string" || userName.trim() === "") {
-      throw new Error("Invalid username");
+      throw new Error("Invalid username"); 
     } else {
       this.#userName = userName;
     }
